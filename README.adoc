@@ -5,39 +5,38 @@ It is also possible to use other builder to generate Amazon EC2, Docker, Google 
 The default configuration is build to generate a Vagrant Base Box image.
 It will use the Chef provisioner and the OpenNMS Chef cookbook to install and configure OpenNMS.
 
-The system is build with a disk size of 40 GB. Other parameters for RAM and CPU depend on the configuration of the 'Vagrantfile'.
+The system is build with a disk size of 40 GB. Other parameters for RAM and CPU depend on the configuration in the packer template JSON file.
 
 == Dependencies
-The repository link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] is included as 'git submodule' in 'packer/cookbooks/opennms-light' to avoid a fork of the Chef cookbook.
+The repository link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] is included as 'git submodule' in 'ubuntu-14.04/cookbooks/opennms-light' to avoid a fork of the Chef cookbook.
 
 IMPORTANT: If you want to make changes in the OpenNMS cookbook, please commit to link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] and run `git submodule update --init --recursive --remote`
-in the 'opennms-vagrant' repository to get the cookbook updated.
+in the 'packer-opennms' repository to get the cookbook updated.
 
 == Requirements and environments
 The cookbook is build based on the following requirements:
 
- * Internet access to download CentOS 7 ISO install files
- * link:https://www.virtualbox.org/wiki/Downloads[VirtualBox 4.3.14]
+ * Internet access to download Ubuntu 14.04 ISO install files
+ * link:https://www.virtualbox.org/wiki/Downloads[VirtualBox 4.3.28]
  * link:http://www.packer.io/downloads.html[packer]
 
-WARNING: The setup is build just for _CentOS 7_ and is not tested on other platforms.
+WARNING: The setup is build just for _Ubuntu 14.04_ and is not tested on other platforms.
 
 == Usage
 
 - Download or clone the repository from GitHub, there is a ZIP and tar.gz file also available in 'releases'.
 ----
-git clone https://github.com/opennms-forge/opennms-packer.git
+git clone https://github.com/indigo423/packer-opennms.git
 ----
 
 - Change into the 'opennms-packer/packer' directory and build the base box:
 ----
-cd opennms-packer/packer
-packer build -var mirror=http://mirror.opennms.eu/centos -only=virtualbox-iso opennms-centos-6.5.json
+cd packer-opennms/ubuntu-14.04
+packer build -only=virtualbox-iso opennms-stable-ubuntu-14.04.json
 ----
 
-The parameter `mirror` is used for downloading the CentOS 7 ISO image.
 With `-only=virtualbox-iso` only the VirtualBox based image will be created.
-The 'opennms-centos-6.5.json' file contains the CentOS 7 PXE boot with Kickstart file and builds the system from scratch.
+The 'opennms-stable-ubuntu-14.04.json' file contains the Ubuntu 14.04 PXE boot with Kickstart file and builds the system from scratch.
 
 == Contributing
 
