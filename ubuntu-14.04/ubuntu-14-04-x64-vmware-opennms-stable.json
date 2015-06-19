@@ -1,57 +1,9 @@
 {
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
-      "override": {
-        "virtualbox-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/virtualbox.sh",
-            "scripts/tools.sh",
-            "scripts/chef.sh",
-            "scripts/cleanup.sh",
-            "scripts/zerodisk.sh"
-          ]
-        },
-        "vmware-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/vmware.sh",
-            "scripts/tools.sh",
-            "scripts/chef.sh",
-            "scripts/cleanup.sh",
-            "scripts/zerodisk.sh"
-          ]
-        }
-      }
-    },
-    {
-      "cookbook_paths": ["cookbooks"],
-      "type": "chef-solo",
-      "run_list": "opennms-light"
-    }
-  ],
   "variables": {
     "chef_version": "provisionerless",
     "iso_mirror": "releases.ubuntu.com",
     "opennms_release": "stable"
   },
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "override": {
-        "virtualbox": {
-          "output": "ubuntu-14-04-x64-virtualbox-opennms-{{user `opennms_release`}}.box"
-        },
-        "vmware": {
-          "output": "ubuntu-14-04-x64-vmware-opennms-{{user `opennms_release`}}.box"
-        }
-      }
-    }
-  ],
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -142,5 +94,56 @@
         "cpuid.coresPerSocket": "2"
       }
     }
-  ]
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/virtualbox.sh",
+            "scripts/tools.sh",
+            "scripts/chef.sh",
+            "scripts/cleanup.sh",
+            "scripts/zerodisk.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/vmware.sh",
+            "scripts/tools.sh",
+            "scripts/chef.sh",
+            "scripts/cleanup.sh",
+            "scripts/zerodisk.sh"
+          ]
+        }
+      }
+    },
+    {
+      "cookbook_paths": ["cookbooks"],
+      "type": "chef-solo",
+      "run_list": "opennms-light"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "override": {
+        "virtualbox": {
+          "output": "ubuntu-14-04-x64-virtualbox-opennms-{{user `opennms_release`}}.box"
+        },
+        "vmware": {
+          "output": "ubuntu-14-04-x64-vmware-opennms-{{user `opennms_release`}}.box"
+        }
+      }
+    }
+  ],
+  "push": {
+  "name": "indigo/opennms-stable-repo"
+  }
 }
