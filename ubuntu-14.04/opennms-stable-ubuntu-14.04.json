@@ -9,6 +9,7 @@
             "scripts/base.sh",
             "scripts/vagrant.sh",
             "scripts/virtualbox.sh",
+            "scripts/tools.sh",
             "scripts/chef.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
@@ -19,6 +20,7 @@
             "scripts/base.sh",
             "scripts/vagrant.sh",
             "scripts/vmware.sh",
+            "scripts/tools.sh",
             "scripts/chef.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
@@ -32,6 +34,9 @@
       "run_list": "opennms-light"
     }
   ],
+  "variables": {
+    "chef_version": "provisionerless"
+  },
   "post-processors": [
     {
       "type": "vagrant",
@@ -75,7 +80,7 @@
       "boot_wait": "10s",
       "disk_size": 40960,
       "guest_os_type": "Ubuntu_64",
-      "headless": true,
+      "headless": false,
       "http_directory": "http",
       "iso_checksum": "83aabd8dcf1e8f469f3c72fff2375195",
       "iso_checksum_type": "md5",
@@ -119,7 +124,7 @@
       "boot_wait": "10s",
       "disk_size": 40960,
       "guest_os_type": "linux",
-      "headless": true,
+      "headless": false,
       "http_directory": "http",
       "iso_checksum": "83aabd8dcf1e8f469f3c72fff2375195",
       "iso_checksum_type": "md5",
