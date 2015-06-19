@@ -1,0 +1,21 @@
+[submodule "ubuntu-14.04/cookbooks/apt"]
+	path = ubuntu-14.04/cookbooks/apt
+	url = https://github.com/opscode-cookbooks/apt.git
+[submodule "ubuntu-14.04/cookbooks/build-essential"]
+	path = ubuntu-14.04/cookbooks/build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "ubuntu-14.04/cookbooks/chef-sugar"]
+	path = ubuntu-14.04/cookbooks/chef-sugar
+	url = https://github.com/sethvargo/chef-sugar.git
+[submodule "ubuntu-14.04/cookbooks/openssl"]
+	path = ubuntu-14.04/cookbooks/openssl
+	url = https://github.com/opscode-cookbooks/openssl.git
+[submodule "ubuntu-14.04/cookbooks/postgresql"]
+	path = ubuntu-14.04/cookbooks/postgresql
+	url = https://github.com/hw-cookbooks/postgresql.git
+[submodule "ubuntu-14.04/cookbooks/opennms-light"]
+	path = ubuntu-14.04/cookbooks/opennms-light
+	url = https://github.com/opennms-forge/chef-opennms-light.git
+[submodule "ubuntu-14.04/cookbooks/ubuntu"]
+	path = ubuntu-14.04/cookbooks/ubuntu
+	url = https://github.com/opscode-cookbooks/ubuntu.git
