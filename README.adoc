@@ -1,0 +1,55 @@
+= Packer setup for OpenNMS
+This repository allows to create base box image which can be used in Vagrant.
+It is also possible to use other builder to generate Amazon EC2, Docker, Google Compute Engine, OpenStack or VMware images.
+
+The default configuration is build to generate a Vagrant Base Box image.
+It will use the Chef provisioner and the OpenNMS Chef cookbook to install and configure OpenNMS.
+
+The system is build with a disk size of 40 GB. Other parameters for RAM and CPU depend on the configuration of the 'Vagrantfile'.
+
+== Dependencies
+The repository link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] is included as 'git submodule' in 'packer/cookbooks/opennms-light' to avoid a fork of the Chef cookbook.
+
+IMPORTANT: If you want to make changes in the OpenNMS cookbook, please commit to link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] and run `git submodule update --init --recursive --remote`
+in the 'opennms-vagrant' repository to get the cookbook updated.
+
+== Requirements and environments
+The cookbook is build based on the following requirements:
+
+ * Internet access to download CentOS 7 ISO install files
+ * link:https://www.virtualbox.org/wiki/Downloads[VirtualBox 4.3.14]
+ * link:http://www.packer.io/downloads.html[packer]
+
+WARNING: The setup is build just for _CentOS 7_ and is not tested on other platforms.
+
+== Usage
+
+- Download or clone the repository from GitHub, there is a ZIP and tar.gz file also available in 'releases'.
+----
+git clone https://github.com/opennms-forge/opennms-packer.git
+----
+
+- Change into the 'opennms-packer/packer' directory and build the base box:
+----
+cd opennms-packer/packer
+packer build -var mirror=http://mirror.opennms.eu/centos -only=virtualbox-iso opennms-centos-6.5.json
+----
+
+The parameter `mirror` is used for downloading the CentOS 7 ISO image.
+With `-only=virtualbox-iso` only the VirtualBox based image will be created.
+The 'opennms-centos-6.5.json' file contains the CentOS 7 PXE boot with Kickstart file and builds the system from scratch.
+
+== Contributing
+
+1. Fork the repository on Github
+2. Create a named feature branch (i.e. `add-new-recipe`)
+3. Write your change
+4. Write tests for your change (if applicable)
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request
+
+== License and Authors
+
+Author:: Ronny Trommer <ronny@opennms.org>
+Copyright (c) 2014 The OpenNMS Group, Inc.
+License:: GPLv3+
