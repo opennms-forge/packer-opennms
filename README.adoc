@@ -32,9 +32,8 @@ git clone https://github.com/indigo423/packer-opennms.git
 - Change into the 'opennms-packer/packer' directory and build the base box:
 ----
 cd packer-opennms/ubuntu-14.04
-packer build -only=virtualbox-iso ubuntu-14-04-x64-vmware-opennms-stable.json
+packer build -var opennms_release=stable -only=virtualbox-iso ubuntu-14-04-x64-opennms.json
 ----
-
 With `-only=virtualbox-iso` only the VirtualBox based image will be created.
 The 'opennms-stable-ubuntu-14.04.json' file contains the Ubuntu 14.04 PXE boot with Kickstart file and builds the system from scratch.
 
