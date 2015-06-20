@@ -1,4 +1,7 @@
 {
+  "push": {
+    "name": "indigo/opennms-stable-repo"
+  },
   "variables": {
     "chef_version": "provisionerless",
     "iso_mirror": "releases.ubuntu.com",
@@ -127,7 +130,24 @@
     {
       "cookbook_paths": ["cookbooks"],
       "type": "chef-solo",
-      "run_list": "opennms-light"
+      "run_list": "opennms-light",
+      "json": {
+        "opennms":{
+          "release":"{{user `opennms_release`}}",
+          "java_heap_space":1024,
+          "repository":{
+            "apt": "debian.opennms.eu"
+          },
+          "library": {
+            "jrrd":"/usr/lib/jni/libjrrd.so"
+          },
+          "rrd": {
+            "strategyClass": "org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy",
+            "interfaceJar": "/usr/share/java/jrrd.jar"
+          },
+          "storeByForeignSource": true
+        }
+      }
     }
   ],
   "post-processors": [
