@@ -142,8 +142,5 @@
         }
       }
     }
-  ],
-  "push": {
-  "name": "indigo/opennms-stable-repo"
-  }
+  ]
 }
