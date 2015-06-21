@@ -1,0 +1,121 @@
+{
+  "push": {
+    "name": "indigo/opennms-stable-repo"
+  },
+  "variables": {
+    "chef_version": "provisionerless",
+    "iso_mirror": "ftp.iij.ad.jp",
+    "opennms_release": "stable"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 40520,
+      "guest_os_type": "RedHat_64",
+      "headless": true,
+      "http_directory": "http",
+      "iso_checksum": "1795184136b8bdddabe50453cc2cc2d46f0f7c5e",
+      "iso_checksum_type": "sha1",
+      "iso_url": "http://{{user `iso_mirror`}}/pub/linux/centos/7.1.1503/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 40520,
+      "guest_os_type": "centos-64",
+      "headless": true,
+      "http_directory": "http",
+      "iso_checksum": "1795184136b8bdddabe50453cc2cc2d46f0f7c5e",
+      "iso_checksum_type": "sha1",
+      "iso_url": "http://{{user `iso_mirror`}}/pub/linux/centos/7.1.1503/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo '/sbin/halt -h -p' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
+      "tools_upload_flavor": "linux",
+      "vmx_data": {
+        "memsize": "2048",
+        "numvcpus": "2",
+        "cpuid.coresPerSocket": "1"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/virtualbox.sh",
+            "scripts/cleanup.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/vmware.sh",
+            "scripts/cleanup.sh"
+          ]
+        }
+      }
+    },
+    {
+      "cookbook_paths": ["cookbooks"],
+      "type": "chef-solo",
+      "run_list": "opennms-light",
+      "json": {
+        "opennms":{
+          "release":"{{user `opennms_release`}}",
+          "java_heap_space":1024,
+          "repository":{
+            "yum": "yum.opennms.eu"
+          },
+          "library": {
+            "jrrd":"/usr/lib/jni/libjrrd.so"
+          },
+          "rrd": {
+            "strategyClass": "org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy",
+            "interfaceJar": "/usr/share/java/jrrd.jar"
+          },
+          "storeByForeignSource": true
+        }
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "override": {
+        "virtualbox": {
+          "output": "centos-7.1-x64-virtualbox-opennms-{{user `opennms_release`}}.box"
+        },
+        "vmware": {
+          "output": "centos-7.1-x64-vmware-opennms-{{user `opennms_release`}}.box"
+        }
+      }
+    }
+  ]
+}
