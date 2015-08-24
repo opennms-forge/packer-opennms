@@ -136,7 +136,7 @@
           "release":"{{user `opennms_release`}}",
           "java_heap_space":1024,
           "repository":{
-            "apt": "debian.opennms.eu"
+            "apt": "debian.opennms.org"
           },
           "library": {
             "jrrd":"/usr/lib/jni/libjrrd.so"
