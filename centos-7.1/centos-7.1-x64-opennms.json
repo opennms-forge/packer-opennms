@@ -4,7 +4,7 @@
   },
   "variables": {
     "chef_version": "provisionerless",
-    "iso_mirror": "ftp.iij.ad.jp",
+    "iso_mirror": "mirror.informatik.hs-fulda.de",
     "opennms_release": "stable"
   },
   "builders": [
