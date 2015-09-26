@@ -91,7 +91,7 @@
           "release":"{{user `opennms_release`}}",
           "java_heap_space":1024,
           "repository":{
-            "yum": "yum.opennms.eu"
+            "yum": "yum.opennms.org"
           },
           "library": {
             "jrrd":"/usr/lib/jni/libjrrd.so"
