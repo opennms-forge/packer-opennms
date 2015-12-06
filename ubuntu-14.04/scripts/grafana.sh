@@ -87,6 +87,10 @@ installGrafana() {
   update-rc.d grafana-server defaults 95 10 1>/dev/null 2>>${ERROR_LOG}
   checkError ${?}
 
+  echo -n "Install OpenNMS Grafana Plugin     ... "
+  apt-get install -y grafana-opennms-plugin 1>/dev/null 2>>${ERROR_LOG}
+  checkError ${?}
+
   echo -n "Start Grafana Server               ... "
   service grafana-server start 1>/dev/null 2>>${ERROR_LOG}
   checkError ${?}
