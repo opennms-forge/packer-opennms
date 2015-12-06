@@ -109,7 +109,7 @@
             "scripts/vagrant.sh",
             "scripts/virtualbox.sh",
             "scripts/tools.sh",
-            "scripts/opennms.sh -r {{user `opennms_release`}}",
+            "scripts/opennms.sh",
             "scripts/grafana.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
@@ -121,7 +121,7 @@
             "scripts/vagrant.sh",
             "scripts/vmware.sh",
             "scripts/tools.sh",
-            "scripts/opennms.sh -r {{user `opennms_release`}}",
+            "scripts/opennms.sh",
             "scripts/grafana.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
