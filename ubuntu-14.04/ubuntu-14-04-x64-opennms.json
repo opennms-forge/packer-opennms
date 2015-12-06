@@ -4,7 +4,7 @@
   },
   "variables": {
     "chef_version": "provisionerless",
-    "iso_mirror": "releases.ubuntu.com",
+    "iso_mirror": "mirror.informatik.hs-fulda.de/ubuntu-releases",
     "opennms_release": "stable"
   },
   "builders": [
@@ -126,25 +126,6 @@
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
           ]
-        }
-      }
-    },
-    {
-      "cookbook_paths": ["cookbooks"],
-      "type": "chef-solo",
-      "run_list": "opennms-light",
-      "json": {
-        "opennms":{
-          "release":"{{user `opennms_release`}}",
-          "java_heap_space":1024,
-          "library": {
-            "jrrd":"/usr/lib/jni/libjrrd.so"
-          },
-          "rrd": {
-            "strategyClass": "org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy",
-            "interfaceJar": "/usr/share/java/jrrd.jar"
-          },
-          "storeByForeignSource": true
         }
       }
     }
