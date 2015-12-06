@@ -110,6 +110,7 @@
             "scripts/virtualbox.sh",
             "scripts/tools.sh",
             "scripts/opennms.sh",
+            "scripts/grafana.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
           ]
@@ -121,6 +122,7 @@
             "scripts/vmware.sh",
             "scripts/tools.sh",
             "scripts/opennms.sh",
+            "scripts/grafana.sh",
             "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
           ]
