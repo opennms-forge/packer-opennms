@@ -116,7 +116,7 @@ enableGrafanaBox() {
 
 grafanaOnmsDataSource() {
   echo -n "Set Grafana OpenNMS data source    ... "
-  curl 'http://admin:admin@localhost:3000/api/datasources' -X Pn;charset=UTF-8' --data-binary '{"name":"OpenNMS","type":"opennms","access":"proxy","url":"http://localhost:8980/opennms","isDefault":true,"basicAuth":true,"basicAuthUser":"admin","basicAuthPassword":"admin"}'
+  curl 'http://admin:admin@localhost:3000/api/datasources' -X POST -H 'Content-Type:application/json;charset=UTF-8' --data-binary '{"name":"OpenNMS","type":"opennms","access":"proxy","url":"http://localhost:8980/opennms","isDefault":true,"basicAuth":true,"basicAuthUser":"admin","basicAuthPassword":"admin"}'
   checkError ${?}
 }
 
