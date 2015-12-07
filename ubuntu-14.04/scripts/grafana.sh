@@ -123,3 +123,4 @@ grafanaOnmsDataSource() {
 installGrafanaRepo
 installGrafana
 enableGrafanaBox
+grafanaOnmsDataSource
