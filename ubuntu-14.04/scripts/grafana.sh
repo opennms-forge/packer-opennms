@@ -12,13 +12,12 @@ REQUIRED_SYSTEMS="Ubuntu|Debian"
 RELEASE_FILE="/etc/issue"
 
 # Error codes
-E_ILLEGAL_ARGS=126
 E_BASH=127
 E_UNSUPPORTED=128
 
 # Test if system is supported
-cat ${RELEASE_FILE} | grep -E ${REQUIRED_SYSTEMS} 1>/dev/null 2>>${ERROR_LOG}
-if [ ! ${?} -eq 0 ]; then
+grep -E "${REQUIRED_SYSTEMS}" "${RELEASE_FILE}" 1>/dev/null 2>>${ERROR_LOG}
+if [ ! "${?}" -eq 0 ]; then
   echo ""
   echo "This is system is not a supported Ubuntu or Debian system."
   echo ""
@@ -37,7 +36,7 @@ fi
 ####
 # Helper function which tests if a command was successful or failed
 checkError() {
-  if [ $1 -eq 0 ]; then
+  if [ "$1" -eq 0 ]; then
     echo "OK"
   else
     echo "FAILED"
@@ -50,7 +49,7 @@ checkError() {
 installGrafanaRepo() {
   if [ ! -f /etc/apt/sources.list.d/grafana-${RELEASE}.list ]; then
     echo -n "Install Grafana Repository         ... "
-    printf "deb https://packagecloud.io/grafana/${RELEASE}/debian/ wheezy main" > /etc/apt/sources.list.d/grafana-${RELEASE}.list
+    printf 'deb https://packagecloud.io/grafana/%s/debian/ wheezy main' "${RELEASE}"> /etc/apt/sources.list.d/grafana-${RELEASE}.list
     checkError ${?}
 
     echo -n "Install Grafana Repository Key     ... "
