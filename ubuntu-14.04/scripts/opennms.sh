@@ -275,7 +275,7 @@ initializeOnmsDb() {
 
 restartOnms() {
   echo -n "Starting OpenNMS                   ... "
-  service opennms restart 1>/dev/null 2>>${ERROR_LOG}
+  service opennms -Q start 1>/dev/null 2>>${ERROR_LOG}
   checkError ${?}
 }
 
