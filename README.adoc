@@ -1,50 +1,49 @@
 = Packer setup for OpenNMS
-This repository allows to create base box image which can be used in Vagrant.
-It is also possible to use other builder to generate Amazon EC2, Docker, Google Compute Engine, OpenStack or VMware images.
+
+This repository allows to create base box images with OpenNMS and Grafana.
+It is mostly used with Vagrant but can be extented to create Amazon EC2, Docker, Google Compute Engine, OpenStack or VMware images.
 
 The default configuration is build to generate a Vagrant Base Box image.
-It will use the Chef provisioner and the OpenNMS Chef cookbook to install and configure OpenNMS.
 
-The system is build with a disk size of 40 GB. Other parameters for RAM and CPU depend on the configuration in the packer template JSON file.
-
-== Dependencies
-The repository link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] is included as 'git submodule' in 'ubuntu-14.04/cookbooks/opennms-light' to avoid a fork of the Chef cookbook.
-
-IMPORTANT: If you want to make changes in the OpenNMS cookbook, please commit to link:https://github.com/opennms-forge/opennms-chef.git¢[opennms-chef] and run `git submodule update --init --recursive --remote`
-in the 'packer-opennms' repository to get the cookbook updated.
+The system is build with a disk size of 20 GB and 2GB RAM.
+Other parameters for RAM and CPU depend on the configuration in the packer template JSON file.
 
 == Requirements and environments
+
 The cookbook is build based on the following requirements:
 
- * Internet access to download Ubuntu 14.04 ISO install files
- * link:https://www.virtualbox.org/wiki/Downloads[VirtualBox 4.3.28]
+ * Internet access to download ISO images and packages
+ * link:https://www.virtualbox.org/wiki/Downloads[latest VirtualBox]
  * link:http://www.packer.io/downloads.html[packer]
-
-WARNING: The setup is build just for _Ubuntu 14.04_ and is not tested on other platforms.
 
 == Usage
 
 - Download or clone the repository from GitHub, there is a ZIP and tar.gz file also available in 'releases'.
 ----
-git clone https://github.com/indigo423/packer-opennms.git
+git clone https://github.com/opennms-forge/packer-opennms.git
 ----
 
-- Change into the 'opennms-packer/packer' directory and build the base box:
+Change into the 'packer-opennms/ubuntu-lts' directory and build the base box based on Ubuntu:
+
 ----
-cd packer-opennms/ubuntu-14.04
-git submodule init
-packer build -var opennms_release=stable -only=virtualbox-iso ubuntu-14-04-x64-opennms.json
+cd packer-opennms/ubuntu-lts
+packer build -var opennms_release=stable -only=virtualbox-iso template.json
 ----
+
+Change into the 'packer-opennms/centos-7' directory and build the base box based on CentOS:
+
+----
+cd packer-opennms/centos-7
+packer build -var opennms_release=stable -only=virtualbox-iso template.json
+----
+
 With `-only=virtualbox-iso` only the VirtualBox based image will be created.
-The 'opennms-stable-ubuntu-14.04.json' file contains the Ubuntu 14.04 PXE boot with Kickstart file and builds the system from scratch.
+The 'template.json' file contains the PXE boot, kickstart-files and builds the system from scratch.
 
 == Contributing
 
 1. Fork the repository on Github
 2. Create a named feature branch (i.e. `add-new-recipe`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
 6. Submit a Pull Request
 
 == License and Authors
