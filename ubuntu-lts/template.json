@@ -5,7 +5,7 @@
   "variables": {
     "iso_mirror": "mirror.informatik.hs-fulda.de/ubuntu-releases",
     "opennms_release": "stable",
-    "onms-version": "17.1.0.8153"
+    "onms-version": "17.1.1-1"
   },
   "builders": [
     {
