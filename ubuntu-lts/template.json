@@ -5,7 +5,7 @@
   "variables": {
     "iso_mirror": "mirror.informatik.hs-fulda.de/ubuntu-releases",
     "opennms_release": "stable",
-    "onms-version": "17.1.1-1"
+    "onms-version": "17.1.1-2"
   },
   "builders": [
     {
@@ -27,7 +27,7 @@
         " keyboard-configuration/layout=USA<wait>",
         " keyboard-configuration/variant=USA<wait>",
         " locale=en_US<wait>",
-        " netcfg/get_hostname=ubuntu-1404<wait>",
+        " netcfg/get_hostname=ubuntu-1604<wait>",
         " netcfg/get_domain=vagrantup.com<wait>",
         " noapic<wait>",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait>",
@@ -39,9 +39,9 @@
       "guest_os_type": "Ubuntu_64",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
+      "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://{{user `iso_mirror`}}/14.04.4/ubuntu-14.04.4-server-amd64.iso",
+      "iso_url": "http://{{user `iso_mirror`}}/16.04/ubuntu-16.04-server-amd64.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -71,7 +71,7 @@
         " keyboard-configuration/layout=USA<wait>",
         " keyboard-configuration/variant=USA<wait>",
         " locale=en_US<wait>",
-        " netcfg/get_hostname=ubuntu-1404<wait>",
+        " netcfg/get_hostname=ubuntu-1604<wait>",
         " netcfg/get_domain=vagrantup.com<wait>",
         " noapic<wait>",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait>",
@@ -83,9 +83,9 @@
       "guest_os_type": "linux",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
+      "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://{{user `iso_mirror`}}/14.04.4/ubuntu-14.04.4-server-amd64.iso",
+      "iso_url": "http://{{user `iso_mirror`}}/16.04/ubuntu-16.04-server-amd64.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
