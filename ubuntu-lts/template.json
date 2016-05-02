@@ -119,26 +119,30 @@
       "override": {
         "virtualbox-iso": {
           "scripts": [
-            "scripts/base.sh",
+            "scripts/update.sh",
+            "scripts/sshd.sh",
+            "scripts/networking.sh",
             "scripts/vagrant.sh",
             "scripts/virtualbox.sh",
             "scripts/tools.sh",
             "scripts/opennms.sh",
             "scripts/grafana.sh",
             "scripts/cleanup.sh",
-            "scripts/zerodisk.sh"
+            "scripts/minimize.sh"
           ]
         },
         "vmware-iso": {
           "scripts": [
-            "scripts/base.sh",
+            "scripts/update.sh",
+            "scripts/sshd.sh",
+            "scripts/networking.sh",
             "scripts/vagrant.sh",
             "scripts/vmware.sh",
             "scripts/tools.sh",
             "scripts/opennms.sh",
             "scripts/grafana.sh",
             "scripts/cleanup.sh",
-            "scripts/zerodisk.sh"
+            "scripts/minimize.sh"
           ]
         }
       }
