@@ -31,9 +31,9 @@ apt-get install -y opennms-plugin-protocol-xml
 apt-get install -y opennms-doc
 
 # Enable RRDtool instead of JRobin
-echo "org.opennms.rrd.strategyClass=org.opennms.netmgt.rrd.rrdtool.MultithreadedJniRrdStrategy" >> /usr/share/opennms/etc/rrd-configuration.properties
-echo "org.opennms.rrd.interfaceJar=/usr/share/java/jrrd2.jar" >> /usr/share/opennms/etc/rrd-configuration.properties
-echo "opennms.library.jrrd2=/usr/lib/jni/libjrrd2.so" >> /usr/share/opennms/etc/rrd-configuration.properties
+echo "org.opennms.rrd.strategyClass=org.opennms.netmgt.rrd.rrdtool.MultithreadedJniRrdStrategy" >> /usr/share/opennms/etc/opennms.properties.d/rrd-configuration.properties
+echo "org.opennms.rrd.interfaceJar=/usr/share/java/jrrd2.jar" >> /usr/share/opennms/etc/opennms.properties.d/rrd-configuration.properties
+echo "opennms.library.jrrd2=/usr/lib/jni/libjrrd2.so" >> /usr/share/opennms/etc/opennms.properties.d/rrd-configuration.properties
 
 # Set Java for environment for OpenNMS
 /usr/share/opennms/bin/runjava -s
