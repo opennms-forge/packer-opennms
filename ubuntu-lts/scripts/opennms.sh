@@ -23,12 +23,11 @@ echo "opennmsdb opennms-db/noinstall string ok" | debconf-set-selections
 # Install OpenNMS with RRDtool
 apt-get install -y opennms-db
 apt-get install -y opennms-server
-apt-get install -y rrdtool
-apt-get install -y jrrd2
 apt-get install -y opennms-webapp-jetty
 apt-get install -y opennms-contrib
 apt-get install -y opennms-plugin-protocol-xml
 apt-get install -y opennms-doc
+apt-get install -y jrrd2
 
 # Enable RRDtool instead of JRobin
 echo "org.opennms.rrd.strategyClass=org.opennms.netmgt.rrd.rrdtool.MultithreadedJniRrdStrategy" >> /usr/share/opennms/etc/opennms.properties.d/rrd-configuration.properties
