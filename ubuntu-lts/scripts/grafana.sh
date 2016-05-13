@@ -1,4 +1,4 @@
-printf 'deb https://packagecloud.io/grafana/%s/debian/ wheezy main' "testing"> /etc/apt/sources.list.d/grafana.list
+printf 'deb https://packagecloud.io/grafana/%s/debian/ wheezy main' "stable"> /etc/apt/sources.list.d/grafana.list
 wget -q -O - https://packagecloud.io/gpg.key | sudo apt-key add -
 apt-get update
 apt-get install -y grafana
