@@ -92,10 +92,10 @@
       "type": "vagrant",
       "override": {
         "virtualbox": {
-          "output": "centos-7-x64-virtualbox-opennms-{{user `onms-version`}}.box"
+          "output": "centos-7-x64-virtualbox-opennms.box"
         },
         "vmware": {
-          "output": "centos-7-x64-vmware-opennms-{{user `onms-version`}}.box"
+          "output": "centos-7-x64-vmware-opennms.box"
         }
       }
     }
