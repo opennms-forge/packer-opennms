@@ -2,6 +2,7 @@ printf 'deb https://packagecloud.io/grafana/%s/debian/ wheezy main' "stable"> /e
 wget -q -O - https://packagecloud.io/gpg.key | sudo apt-key add -
 apt-get update
 apt-get install -y grafana
+systemctl daemon-reload
 systemctl enable grafana-server
 systemctl start  grafana-server
 sleep 5
