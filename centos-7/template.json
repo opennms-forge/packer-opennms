@@ -1,12 +1,42 @@
 {
   "push": {
-    "name": "opennms/vagrant-opennms-centos-stable "
+    "name": "indigo/opennms-centos-stable",
+    "vcs": true
   },
   "variables": {
     "iso_mirror": "mirror.informatik.hs-fulda.de",
     "opennms_release": "stable",
-    "onms-version": "17.1.1-1"
+    "atlas_username": "{{env `ATLAS_USERNAME`}}",
+    "atlas_name": "{{env `ATLAS_NAME`}}"
   },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/virtualbox.sh",
+            "scripts/opennms.sh",
+            "scripts/grafana.sh",
+            "scripts/cleanup.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/vmware.sh",
+            "scripts/opennms.sh",
+            "scripts/grafana.sh",
+            "scripts/cleanup.sh"
+          ]
+        }
+      }
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -59,45 +89,30 @@
       }
     }
   ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
-      "override": {
-        "virtualbox-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/virtualbox.sh",
-            "scripts/opennms.sh",
-            "scripts/grafana.sh",
-            "scripts/cleanup.sh"
-          ]
-        },
-        "vmware-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/vmware.sh",
-            "scripts/opennms.sh",
-            "scripts/grafana.sh",
-            "scripts/cleanup.sh"
-          ]
-        }
-      }
-    }
-  ],
-  "post-processors": [
+  "post-processors": [[
     {
       "type": "vagrant",
-      "override": {
-        "virtualbox": {
-          "output": "centos-7-x64-virtualbox-opennms.box"
-        },
-        "vmware": {
-          "output": "centos-7-x64-vmware-opennms.box"
-        }
+      "keep_input_artifact": false
+    },
+    {
+      "type": "atlas",
+      "only": ["vmware-iso"],
+      "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "vmware_desktop",
+        "version": "0.0.1"
+      }
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+          "provider": "virtualbox",
+          "version": "0.0.1"
       }
     }
-  ]
+  ]]
 }
