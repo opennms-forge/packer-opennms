@@ -4,8 +4,7 @@
   },
   "variables": {
     "iso_mirror": "mirror.informatik.hs-fulda.de",
-    "opennms_release": "stable",
-    "onms-version": "17.1.1-1"
+    "opennms_release": "stable"
   },
   "builders": [
     {
