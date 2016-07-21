@@ -154,13 +154,11 @@
   ],
   "post-processors": [
     {
-      "type": "vagrant",
-      "keep_input_artifact": false
+      "type": "vagrant"
     },
     {
       "type": "atlas",
       "only": ["vmware-iso"],
-      "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
       "type": "vagrant",
       "override": {
         "virtualbox": {
