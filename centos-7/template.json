@@ -1,11 +1,42 @@
 {
   "push": {
     "name": "opennms/vagrant-opennms-centos-stable "
+    "vcs": true
   },
   "variables": {
     "iso_mirror": "mirror.informatik.hs-fulda.de",
-    "opennms_release": "stable"
+    "opennms_release": "stable",
+    "atlas_username": "{{env `ATLAS_USERNAME`}}",
+    "atlas_name": "{{env `ATLAS_NAME`}}"
   },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/virtualbox.sh",
+            "scripts/opennms.sh",
+            "scripts/grafana.sh",
+            "scripts/cleanup.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/base.sh",
+            "scripts/vagrant.sh",
+            "scripts/vmware.sh",
+            "scripts/opennms.sh",
+            "scripts/grafana.sh",
+            "scripts/cleanup.sh"
+          ]
+        }
+      }
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -55,34 +86,6 @@
         "memsize": "2048",
         "numvcpus": "2",
         "cpuid.coresPerSocket": "1"
-      }
-    }
-  ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
-      "override": {
-        "virtualbox-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/virtualbox.sh",
-            "scripts/opennms.sh",
-            "scripts/grafana.sh",
-            "scripts/cleanup.sh"
-          ]
-        },
-        "vmware-iso": {
-          "scripts": [
-            "scripts/base.sh",
-            "scripts/vagrant.sh",
-            "scripts/vmware.sh",
-            "scripts/opennms.sh",
-            "scripts/grafana.sh",
-            "scripts/cleanup.sh"
-          ]
-        }
       }
     }
   ],
