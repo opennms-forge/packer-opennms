@@ -1,6 +1,6 @@
 {
   "push": {
-    "name": "opennms/vagrant-opennms-centos-stable "
+    "name": "opennms/vagrant-opennms-centos-stable",
     "vcs": true
   },
   "variables": {
